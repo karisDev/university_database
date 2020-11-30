@@ -11,38 +11,42 @@ namespace university_database
 {
     class DataAccess // Возможна SQL иньекция, нужно создать отдельную процедуру. Но я этого делать не буду из-за поверхностных знаний SQL
     {
-        public List<Profile> SearchProfiles(string search_text, int search_type) // 'дай мне всю информацию из сервера и положи ее в класс профилей'
+        readonly string[] terms =
         {
-            // 0 - id, 1 - Last Name, 2 - Date Of Birth
+            "id",
+            "last_name",
+            "first_name",
+            "middle_name",
+            "birth_date",
+            "institute",
+            "inst_group",
+            "course",
+            "average_score"
+        };
+        public List<Profile> SearchProfiles(string search_text, int search_type) // 'дай мне всю информацию из сервера и положи ее в список класса Profiles'
+        {
             using (IDbConnection connection = new MySql.Data.MySqlClient.MySqlConnection(Helper.CnnVal("UniversityDB")))
             {
-                switch(search_type)
+                if(search_type == 4) // форматирование даты для SQL 01.02.1970 --> 1970-02-01
                 {
-                    case 0:
-                        return connection.Query<Profile>($"SELECT * FROM profiles WHERE ID LIKE '%{ search_text }%'").ToList();
-                    case 1:
-                        return connection.Query<Profile>($"SELECT * FROM profiles WHERE last_name LIKE '%{ search_text }%'").ToList();
-                    case 2:
-                        //2002-06-22 <- 22.06.2002
-                        string temp_text = "";
-                        foreach(string i in search_text.Split('.').Reverse()) // 2002 06 22
-                        {
-                            temp_text += i + "-";
-                        }// 2002-06-22-
-                        temp_text.Remove(temp_text.Length - 1); // 2002-06-22
-
-                        return connection.Query<Profile>($"SELECT * FROM profiles WHERE birth_date LIKE '%{ temp_text }%'").ToList();
-                    default:
-                        return new List<Profile>();
+                    string temp_text = "";
+                    foreach (string i in search_text.Split('.').Reverse())
+                    {
+                        temp_text += i + "-";
+                    }
+                    temp_text = temp_text.Remove(temp_text.Length - 1);
+                    search_text = temp_text;
                 }
+                return connection.Query<Profile>($"SELECT * FROM profiles WHERE { terms[search_type] } LIKE '%{ search_text }%'").ToList();
             }
         }
         public List<Profile> ViewProfiles(int column, bool ascending)
         {
-            string[] terms = { "ID", "last_name", "birth_date" };
+            string order = "DESC";
+            if (ascending) { order = "ASC"; }
             using (IDbConnection connection = new MySql.Data.MySqlClient.MySqlConnection(Helper.CnnVal("UniversityDB")))
             {
-                return connection.Query<Profile>($"SELECT * FROM profiles ORDER BY {terms[column]}").ToList();
+                return connection.Query<Profile>($"SELECT * FROM profiles ORDER BY { terms[column] } { order }").ToList();
             }
         }
     }

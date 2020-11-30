@@ -18,32 +18,40 @@ namespace university_database
     public partial class ProfilesSQL : Window
     {
         List<Profile> profiles = new List<Profile>();
-        void UpdateList()
+        private void UpdateList()
         {
             profiles_list.ItemsSource = profiles;
             profiles_list.DisplayMemberPath = "full_info";
+
+            int[] scores = new int[profiles.Count];
+            for(int i = 0; i < profiles.Count; i++)
+            {
+                scores[i] = profiles[i].average_score;
+            }
+            biggest_score.Text = scores.Max().ToString();
+            lowest_score.Text = scores.Min().ToString();
+            average_score.Text = scores.Average().ToString();
+            summary_score.Text = scores.Sum().ToString();
         }
         public ProfilesSQL()
         {
             InitializeComponent();
-
-            UpdateList();
         }
-        public void SortClick(Object sender, RoutedEventArgs e)
+        private void SortClick(Object sender, RoutedEventArgs e)
         {
             DataAccess db = new DataAccess();
             profiles = db.ViewProfiles(sort_type.SelectedIndex, (bool)Ascending.IsChecked);
-            MessageBox.Show(sort_type.SelectedIndex.ToString() + " " + Ascending.IsChecked);
             UpdateList();
         }
 
         private void SearchClick(object sender, RoutedEventArgs e)
         {
-            DataAccess db = new DataAccess();
-            if(SearchFor.Text.Split('.').Length < 2 && search_type.SelectedIndex == 2)
+            if(SearchFor.Text.Split('.').Length < 2 && search_type.SelectedIndex == 4 && SearchFor.Text.Length == 10)
             {
                 MessageBox.Show("Неверный формат даты. Пример верной даты: 01.01.1970");
+                return;
             }
+            DataAccess db = new DataAccess();
             profiles = db.SearchProfiles(SearchFor.Text, search_type.SelectedIndex);
             UpdateList();
 
@@ -51,6 +59,16 @@ namespace university_database
             {
                 MessageBox.Show("No any profiles were found");
             }
+        }
+
+        private void NewProfile(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void DeleteProfile(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
         }
     }
 }

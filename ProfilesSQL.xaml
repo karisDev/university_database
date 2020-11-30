@@ -33,62 +33,88 @@
         <FlowDocumentScrollViewer Name="fd_viewer"
                                   Grid.RowSpan="2" Grid.Column="1"
                                   />
-        <Rectangle HorizontalAlignment="Left" Height="571" Margin="299,-15,0,-17" VerticalAlignment="Top" Width="1" Grid.RowSpan="2" Fill="#FFBE2D00" RenderTransformOrigin="0.5,0.5"/>
+        <Rectangle HorizontalAlignment="Left"
+                   Height="571"
+                   Margin="299,-15,0,-17"
+                   VerticalAlignment="Top"
+                   Width="1"
+                   Grid.RowSpan="2"
+                   Fill="#FFBE2D00"
+                   RenderTransformOrigin="0.5,0.5"/>
         <WrapPanel Grid.Row="1" Margin="10,10" >
-            <TextBlock Width="280" FontSize="25" TextAlignment="Center"
-                    Text="Sort by" />
+
+            <TextBlock Width="280" FontSize="25" TextAlignment="Center" Text="Sort by" />
             <Rectangle Height="10" Width="280"/>
             <Rectangle Width="45" />
             <ComboBox x:Name="sort_type" Width="190" FontSize="15" SelectedIndex="0">
                 <TextBlock>ID</TextBlock>
-                <TextBlock>Name</TextBlock>
-                <TextBlock>Date of birth</TextBlock>
+                <TextBlock>Last Name</TextBlock>
+                <TextBlock>First Name</TextBlock>
+                <TextBlock>Middle Name</TextBlock>
+                <TextBlock>Birth Date</TextBlock>
+                <TextBlock>Institute</TextBlock>
+                <TextBlock>Group</TextBlock>
+                <TextBlock>Course</TextBlock>
+                <TextBlock>Average Score</TextBlock>
             </ComboBox>
             <Rectangle Height="10" Width="280"/>
             <Rectangle Width="45" />
-            <Button Content="Sort"  Width="60" Click="SortClick"/>
-            <Rectangle Width="10" />
-            <CheckBox x:Name="Ascending" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <CheckBox x:Name="Ascending" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="True"/>
             <Rectangle Width="10" />
             <TextBlock Text="Ascending" />
+            <Rectangle Width="10" />
+            <Button Content="Sort"  Width="60" Click="SortClick"/>
+
             <Rectangle Height="10" Width="280"/>
-            <TextBlock Width="280" FontSize="25" TextAlignment="Center"
-                    Text="Search for" />
+            <TextBlock Width="280" FontSize="25" TextAlignment="Center" Text="Search for" />
             <Rectangle Height="10" Width="280"/>
             <Rectangle Width="45" />
-            <ComboBox x:Name="search_type" Width="190" FontSize="15" SelectedIndex="0">
+            <ComboBox x:Name="search_type" Width="100" FontSize="15" SelectedIndex="0">
                 <TextBlock>ID</TextBlock>
                 <TextBlock>Last Name</TextBlock>
-                <TextBlock>Date of birth</TextBlock>
+                <TextBlock>First Name</TextBlock>
+                <TextBlock>Middle Name</TextBlock>
+                <TextBlock>Birth Date</TextBlock>
+                <TextBlock>Institute</TextBlock>
+                <TextBlock>Group</TextBlock>
+                <TextBlock>Course</TextBlock>
+                <TextBlock>Average Score</TextBlock>
             </ComboBox>
-            <Rectangle Height="10" Width="280"/>
-            <TextBox x:Name="SearchFor" Text="Киреев" Width="190" TextAlignment="Left" FontSize="15" Height="25" Foreground="#FF151515"/>
             <Rectangle Width="15" />
             <Button Content="Search" Width="75" Click="SearchClick"/>
             <Rectangle Height="10" Width="280"/>
+            <Rectangle Width="45" />
+            <TextBox x:Name="SearchFor" Width="190" TextAlignment="Left" FontSize="15" Height="25" Foreground="#FF151515"/>
+            
+            <Rectangle Height="10" Width="280"/>
             <TextBlock Text="Scores" TextAlignment="Center" Width="280" />
             <Rectangle Height="10" Width="280"/>
-            <TextBlock Text="Biggest:" />
+            <TextBlock Text="Biggest:" TextAlignment="Right" Width="140"/>
             <Rectangle Width="31" />
             <TextBlock x:Name="biggest_score" Text="0"/>
             <Rectangle Height="10" Width="280" />
-            <TextBlock Text="Lowest:" />
+            <TextBlock Text="Lowest:" TextAlignment="Right" Width="136" />
             <Rectangle Width="35" />
             <TextBlock x:Name="lowest_score" Text="0"/>
             <Rectangle Height="10" Width="280"/>
-            <TextBlock Text="Average:" />
+            <TextBlock Text="Average:" TextAlignment="Right" Width="146" />
             <Rectangle Width="25" />
             <TextBlock x:Name="average_score" Text="0"/>
             <Rectangle Height="10" Width="280"/>
-            <TextBlock Text="Summary:" />
+            <TextBlock Text="Summary:" TextAlignment="Right" Width="157"/>
             <Rectangle Width="14" />
             <TextBlock x:Name="summary_score" Text="0"/>
             <!-- biggest_score lowest_score  average_score  summary_score " -->
+
+            <Rectangle Height="10" Width="280"/>
+            <Rectangle Width="45" />
+            <Button Content="New Profile" FontSize="15" Height="31" Width="93" Click="NewProfile" />
+            <Rectangle Width="18" />
+            <Button Content="Delete Profile" FontSize="15" Click="DeleteProfile"/>
         </WrapPanel>
-        <ListBox x:Name="profiles_list" FontSize="14"
+        <ListBox x:Name="profiles_list" FontSize="15"
                  Grid.RowSpan="2" Grid.Column="1"
-                 Background="#151515" Foreground="#e5e5e5" BorderBrush="#151515">
-            
-        </ListBox>
+                 Background="#151515" Foreground="#e5e5e5" BorderBrush="#151515" />
+
     </Grid>
 </Window>
