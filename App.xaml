@@ -1,0 +1,9 @@
+﻿<Application x:Class="university_database.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:university_database"
+             StartupUri="ProfilesSQL.xaml">
+    <Application.Resources>
+         
+    </Application.Resources>
+</Application>
