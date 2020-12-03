@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         FontSize="20"
         Foreground="#e5e5e5"
-        Title="University Database" Height="600" Width="1000" Background="#FF151515">
+        Title="University Database" Height="600" Width="1100" Background="#FF151515">
     <Grid x:Name="g" Margin="0, 15">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="300" />
@@ -35,9 +35,9 @@
                                   />
         <Rectangle HorizontalAlignment="Left"
                    Height="571"
-                   Margin="299,-15,0,-17"
+                   Margin="289,-15,0,-17"
                    VerticalAlignment="Top"
-                   Width="1"
+                   Width="3"
                    Grid.RowSpan="2"
                    Fill="#FFBE2D00"
                    RenderTransformOrigin="0.5,0.5"/>
@@ -85,7 +85,7 @@
             <Rectangle Height="10" Width="280"/>
             <Rectangle Width="45" />
             <TextBox x:Name="SearchFor" Width="190" TextAlignment="Left" FontSize="15" Height="25" Foreground="#FF151515"/>
-            
+
             <Rectangle Height="10" Width="280"/>
             <TextBlock Text="Scores" TextAlignment="Center" Width="280" />
             <Rectangle Height="10" Width="280"/>
@@ -112,9 +112,34 @@
             <Rectangle Width="18" />
             <Button Content="Delete Profile" FontSize="15" Click="DeleteProfile"/>
         </WrapPanel>
+
+        <DataGrid x:Name="profiles_list" FontSize="15"
+                  Grid.RowSpan="2"
+                  CanUserAddRows="False"
+                  AutoGenerateColumns="False"
+                  Margin="295,0,15,-17"
+                  BorderBrush="{x:Null}" Foreground="#FF151515" Background="#FF151515" Grid.ColumnSpan="2">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding id}" Header="id"/>
+                <DataGridTextColumn Binding="{Binding last_name}" Header="Last name"/>
+                <DataGridTextColumn Binding="{Binding first_name}" Header="First name"/>
+                <DataGridTextColumn Binding="{Binding middle_name}" Header="Middle name"/>
+                <DataGridTextColumn Binding="{Binding birth_date, StringFormat=\{0:dd.MM.yyyy\}}" Header="Date of birth"/>
+                <DataGridTextColumn Binding="{Binding institute}" Header="Institute"/>
+                <DataGridTextColumn Binding="{Binding inst_group}" Header="Group"/>
+                <DataGridTextColumn Binding="{Binding course}" Header="Course"/>
+                <DataGridTextColumn Binding="{Binding average_score}" Header="Avg. Score" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+
+        <!--
         <ListBox x:Name="profiles_list" FontSize="15"
                  Grid.RowSpan="2" Grid.Column="1"
                  Background="#151515" Foreground="#e5e5e5" BorderBrush="#151515" />
-
+        <DataGrid x:Name="profiles_list" FontSize="15"
+                  Grid.RowSpan="2"
+                  AutoGenerateColumns="True" Grid.ColumnSpan="2" Margin="295,0,5,0" BorderBrush="{x:Null}" Foreground="#FFE5E5E5" Background="#FF151515"/>
+        -->
     </Grid>
 </Window>

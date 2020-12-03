@@ -14,24 +14,38 @@ using System.Windows.Shapes;
 
 namespace university_database
 {
-    
+
     public partial class ProfilesSQL : Window
     {
         List<Profile> profiles = new List<Profile>();
+        /// <summary>
+        /// Обновление данных в таблице
+        /// </summary>
         private void UpdateList()
         {
             profiles_list.ItemsSource = profiles;
-            profiles_list.DisplayMemberPath = "full_info";
+
 
             int[] scores = new int[profiles.Count];
-            for(int i = 0; i < profiles.Count; i++)
+            for (int i = 0; i < profiles.Count; i++)
             {
                 scores[i] = profiles[i].average_score;
             }
-            biggest_score.Text = scores.Max().ToString();
-            lowest_score.Text = scores.Min().ToString();
-            average_score.Text = scores.Average().ToString();
-            summary_score.Text = scores.Sum().ToString();
+            if (scores.Length > 0)
+            {
+                biggest_score.Text = scores.Max().ToString();
+                lowest_score.Text = scores.Min().ToString();
+                average_score.Text = scores.Average().ToString();
+                summary_score.Text = scores.Sum().ToString();
+            }
+            else
+            {
+                biggest_score.Text = 0.ToString();
+                lowest_score.Text = 0.ToString();
+                average_score.Text = 0.ToString();
+                summary_score.Text = 0.ToString();
+            }
+
         }
         public ProfilesSQL()
         {
@@ -46,7 +60,7 @@ namespace university_database
 
         private void SearchClick(object sender, RoutedEventArgs e)
         {
-            if(SearchFor.Text.Split('.').Length < 2 && search_type.SelectedIndex == 4 && SearchFor.Text.Length == 10)
+            if (search_type.SelectedIndex == 4 && (SearchFor.Text.Split('.').Length < 2 || SearchFor.Text.Length != 10))
             {
                 MessageBox.Show("Неверный формат даты. Пример верной даты: 01.01.1970");
                 return;
